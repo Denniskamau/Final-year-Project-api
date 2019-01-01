@@ -1,10 +1,10 @@
 from app import db 
-
+from flask_bcrypt import Bcrypt
 
 class Company(db.Model):
     """This class represents the campany table"""
 
-    __tablename__ = 'Campanies'
+    __tablename__ = 'companies'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
@@ -30,4 +30,4 @@ class Company(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return "<Companies: {}>".format(self.name)
+        return "<Company: {}>".format(self.name)
