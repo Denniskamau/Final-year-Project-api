@@ -1,18 +1,22 @@
 import os
 
+
 class Config(object):
-    """Parent configuration class """
+    """Parent configuration class."""
     DEBUG = False
-    CSRF_ENABLE = True
+    CSRF_ENABLED = True
     SECRET = os.getenv('SECRET')
+    print("sectet", SECRET)
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 
+
 class DevelopmentConfig(Config):
-    """COnfigs for development"""
+    """Configurations for Development."""
     DEBUG = True
 
-class TestingConfig(config):
-    """Configs for testing"""
+
+class TestingConfig(Config):
+    """Configurations for Testing, with a separate test database."""
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/test_db'
     DEBUG = True
