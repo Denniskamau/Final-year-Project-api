@@ -46,26 +46,26 @@ class CompaniesTestCase(unittest.TestCase):
         self.assertEqual(res.status_code,201)
         self.assertIn('Cysect', str(res.data))
 
-    def test_api_can_get_all_companies(self):
-        """Test API can get a company (GET request)."""
-        self.register_user()
-        result = self.login_user()
-        access_token = json.loads(result.data.decode())['access_token']
+    # def test_api_can_get_all_companies(self):
+    #     """Test API can get a company (GET request)."""
+    #     self.register_user()
+    #     result = self.login_user()
+    #     access_token = json.loads(result.data.decode())['access_token']
 
-        res = self.client().post('/companies/',
-            headers=dict(Authorization="Bearer " + access_token),
-            data=self.company)
-        self.assertEqual(res.status_code, 201)
-        res = self.client().get('/companies/',headers=dict(Authorization="Bearer " + access_token))
-        self.assertEqual(res.status_code, 200)
-        self.assertIn('Cysect', str(res.data))
+    #     res = self.client().post('/companies/',
+    #         headers=dict(Authorization="Bearer " + access_token),
+    #         data=self.company)
+    #     self.assertEqual(res.status_code, 201)
+    #     res = self.client().get('/companies/',headers=dict(Authorization="Bearer " + access_token))
+    #     self.assertEqual(res.status_code, 200)
+    #     self.assertIn('Cysect', str(res.data))
 
     def test_api_can_get_company_by_id(self):
         """Test API can get a single company by using it's id."""
 
         self.register_user()
         result = self.login_user()
-        print("result", result)
+        
         access_token = json.loads(result.data.decode())['access_token']
 
         rv = self.client().post('/companies/',

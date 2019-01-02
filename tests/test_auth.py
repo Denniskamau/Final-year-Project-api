@@ -51,7 +51,7 @@ class AuthTestCase(unittest.TestCase):
 
         # get the results in json format
         result = json.loads(login_res.data.decode())
-        print("result", result)
+        print("result", login_res)
         # Test that the response contains success message
         self.assertEqual(result['message'], "You logged in successfully.")
         # Assert that the status code is equal to 200

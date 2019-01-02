@@ -1,4 +1,5 @@
 from app import db 
+from flask import current_app
 from flask_bcrypt import Bcrypt
 import jwt
 from datetime import datetime, timedelta
@@ -34,7 +35,7 @@ class User(db.Model):
         db.session.add(self)
         db.session.commit()
     
-    def generate_token(self, user_id):
+    def generate_token(self,user_id):
         """Generate the access token """
         
         try:
