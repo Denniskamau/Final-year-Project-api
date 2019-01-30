@@ -18,7 +18,11 @@ consumer_secret = "suKcD9XCcy5Fd2VdiPr0GS1sSt3MRFvJEckC9gbFCnrNefSevk"
 class Streaming(StreamListener):
     print("auth", access_token)
     def on_data(self, data):
-        print (data)
+
+        # print(os.path)
+        with open('/home/dennis/Desktop/projects/python/projectAPI/app/analysis/sream_data.txt', 'w') as f:
+            f.write(data)
+
         return True
 
     def on_error(self, status):
