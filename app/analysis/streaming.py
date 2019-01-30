@@ -8,10 +8,10 @@ from flask.views import MethodView
 from flask import make_response, request, jsonify
 
 #Variables that contains the user credentials to access Twitter API
-access_token = "360352221-FJPX4r8ttCVWiQS9ZNBe8wCSruyGsq7mQxitXY1o"
-access_token_secret = "rNm8eCtdJ6s8DN9dtYPgMLqe549PUqQdmCT3nVhaZ6Cbv"
-consumer_key = "dmZVwBgGoE8hG27TLf3k1cUX6"
-consumer_secret = "suKcD9XCcy5Fd2VdiPr0GS1sSt3MRFvJEckC9gbFCnrNefSevk"
+access_token = os.getenv('ACCESS_TOKEN')
+access_token_secret = os.getenv('ACCESS_TOKEN_SECRET')
+consumer_key = os.getenv('CONSUMER_KEY')
+consumer_secret = os.getenv('CONSUMER_SECRET')
 
 
 #This is a basic listener that just prints received tweets to stdout.
