@@ -7,6 +7,10 @@ class Config(object):
     CSRF_ENABLED = True
     SECRET = os.getenv('SECRET')
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
+    ACCESS_TOKEN_SECRET = os.getenv('ACCESS_TOKEN_SECRET')
+    CONSUMER_KEY = os.getenv('CONSUMER_KEY')
+    CONSUMER_SECRET = os.getenv('CONSUMER_SECRET')
 
 
 class DevelopmentConfig(Config):
