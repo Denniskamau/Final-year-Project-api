@@ -60,11 +60,11 @@ def create_app(config_name):
                                 'name':company.name,
                                 'date_created':company.date_created,
                                 'date_modified': company.date_modified
-                            }  
+                            }
                             results.append(obj)
                         response = jsonify(results)
                         response.status_code = 200
-            
+
                         return response
             else:
                 # user is not legit, so the payload is an error message
@@ -85,7 +85,7 @@ def create_app(config_name):
         if request.method == 'DELETE':
             company.delete()
             return {
-            "message": "company {} deleted successfully".format(company.id) 
+            "message": "company {} deleted successfully".format(company.id)
          }, 200
 
         elif request.method == 'PUT':
@@ -113,7 +113,9 @@ def create_app(config_name):
 
     # import the authentication blueprint and register it on the app
     from .auth import auth_blueprint
+    from .analysis import analysis_blueprint
     app.register_blueprint(auth_blueprint)
+    app.register_blueprint(analysis_blueprint)
 
 
     return app
