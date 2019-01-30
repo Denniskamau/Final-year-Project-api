@@ -4,6 +4,8 @@ from flask.views import MethodView
 from flask import make_response, request, jsonify
 from app.models import User
 
+
+
 class RegistrationView(MethodView):
     """This class registers a new user."""
 
@@ -15,18 +17,24 @@ class RegistrationView(MethodView):
 
         if not user:
             # There is no user so we'll try to register them
+            
             try:
                 post_data = request.data
                 # Register the user
-                name = post_data['name']
+                print("user is", post_data)
+                name = post_data['business_name']
                 email = post_data['email']
                 password = post_data['password']
                 user = User(name= name, email=email, password=password)
                 user.save()
-
+                token = User.generate_token(self,user.id)
                 response = {
-                    'message': 'You registered successfully.'
+                    'status': 'success',
+                    'token': token.decode()
                 }
+                
+
+                
                 # return a response notifying the user that they registered successfully
                 return make_response(jsonify(response)), 201
             except Exception as e:
@@ -44,12 +52,26 @@ class RegistrationView(MethodView):
 
             return make_response(jsonify(response)), 202
 
+ 
+    
+
+
+class UserView(MethodView):
+    def get(self):
+        """This endpoints gets user info and returns"""
+
+        print('/auth/user reached')
+
+        
+
+        
 
 class LoginView(MethodView):
     """This class-based view handles user login and access token generation."""
 
     def post(self):
         """Handle POST request for this view. Url ---> /auth/login"""
+        print ('incoming request',request.data )
         try:
             # Get the user object using their email (unique to every user)
             user = User.query.filter_by(email=request.data['email']).first()
@@ -57,13 +79,13 @@ class LoginView(MethodView):
             # Try to authenticate the found user using their password
             if user and user.password_is_valid(request.data['password']):
                 # Generate the access token. This will be used as the authorization header
-                access_token = User.generate_token(self,user.id)
+                token = User.generate_token(self,user.id)
                 
-                if access_token:
+                if token:
 
                     response = {
-                        'message': 'You logged in successfully.',
-                        'access_token': access_token.decode()
+                        'status': 'success',
+                        'token': token.decode()
                     }
                     
                     return make_response(jsonify(response)), 200
@@ -85,6 +107,7 @@ class LoginView(MethodView):
 
 registration_view = RegistrationView.as_view('register_view')
 login_view = LoginView.as_view('login_view')
+user_view = UserView.as_view('user_view')
 
 
 # Define the rule for the registration url --->  /auth/register
@@ -92,8 +115,13 @@ login_view = LoginView.as_view('login_view')
 auth_blueprint.add_url_rule(
     '/auth/register',
     view_func=registration_view,
-    methods=['POST'])
+    methods=['POST','GET'])
 
+auth_blueprint.add_url_rule(
+    '/auth/user',
+    view_func=user_view,
+    methods=['GET']
+)
 # Define the rule for the registration url --->  /auth/login
 # Then add the rule to the blueprint
 auth_blueprint.add_url_rule(
