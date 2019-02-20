@@ -10,7 +10,7 @@ from tweepy import Stream
 from . import analysis_blueprint
 from flask.views import MethodView
 from flask import make_response, request, jsonify
-
+from flask_json import FlaskJSON, JsonError, json_response, as_json
 
 #Variables that contains the user credentials to access Twitter API
 access_token = "360352221-FJPX4r8ttCVWiQS9ZNBe8wCSruyGsq7mQxitXY1o"
@@ -52,7 +52,7 @@ class GetTweets(MethodView):
                     "status":"success",
                     "response":response
                 }
-                return jsonify(value=response)
+                return make_response(jsonify(data)), 200
 
 
 
