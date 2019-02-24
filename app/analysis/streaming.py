@@ -26,6 +26,7 @@ class GetTweets(MethodView):
         """Handle POST request for this view. Url ---> /stream"""
         print ('incoming request',request.data )
 
+
         auth = OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
         api = tweepy.API(auth,wait_on_rate_limit=True,wait_on_rate_limit_notify=True,retry_count=10,retry_delay=5,retry_errors=5)
