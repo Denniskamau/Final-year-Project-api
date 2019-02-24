@@ -13,18 +13,18 @@ from flask import make_response, request, jsonify
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 
 #Variables that contains the user credentials to access Twitter API
-access_token = "360352221-FJPX4r8ttCVWiQS9ZNBe8wCSruyGsq7mQxitXY1o"
-access_token_secret = "rNm8eCtdJ6s8DN9dtYPgMLqe549PUqQdmCT3nVhaZ6Cbv"
-consumer_key = "dmZVwBgGoE8hG27TLf3k1cUX6"
-consumer_secret = "suKcD9XCcy5Fd2VdiPr0GS1sSt3MRFvJEckC9gbFCnrNefSevk"
+access_token = ""
+access_token_secret = ""
+consumer_key = ""
+consumer_secret = ""
 
 
 all_tweets = []
 class GetTweets(MethodView):
+    response = []
     def post(self):
         """Handle POST request for this view. Url ---> /stream"""
         print ('incoming request',request.data )
-        response = []
 
         auth = OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
@@ -35,24 +35,15 @@ class GetTweets(MethodView):
         tweets = tweepy.Cursor(api.search,q=query,lang="en",since=date_since).items(10)
 
         for tweet in tweets:
-
-            print("tweet is",tweet.text)
             predict = Prediction()
             results = predict.receiveAnalysisParameter(tweet.text)
-            response.append(results)
-            #print("result is",results)
+            self.response.append(results)
+
             count +=1
             if count >=10:
                 print("count is greater than 10")
-                #return make_response(jsonify(response)), 201
-                print("all result",response)
 
-                data = {
-                    "message":"Finished anaysis of the first 10 tweets",
-                    "status":"success",
-                    "response":response
-                }
-                return make_response(jsonify(data)), 200
+        return make_response(self.response)
 
 
 

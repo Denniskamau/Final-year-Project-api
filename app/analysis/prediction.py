@@ -82,18 +82,22 @@ class Prediction():
         predictedSentiment = self.sess.run(self.prediction, {self.input_data: inputMatrix})[0]
         # predictedSentiment[0] represents output score for positive sentiment
         # predictedSentiment[1] represents output score for negative sentiment
+        percentage = {"pos":"","neg":""}
+        percentage["pos"]= str(predictedSentiment[0])
+        percentage["neg"]= str(predictedSentiment[1])
+
         if (predictedSentiment[0] > predictedSentiment[1]):
             data = {
-                "msg": "Positive Sentiment",
-                "percentage": predictedSentiment,
+                "message": "Positive Sentiment",
+                "percentage": percentage,
                 "tweet":inputParam
             }
             return data
         else:
             data = {
-                "msg":"Negative Sentiment",
-               "percentage": predictedSentiment,
-               "tweet":inputParam
+                "message":"Negative Sentiment",
+               "tweet":inputParam,
+               "percentage":percentage
             }
             return data
 
