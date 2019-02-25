@@ -1,16 +1,9 @@
-#Import the necessary methods from tweepy library
-import os
-import json
-import asyncio
 import tweepy
 from .prediction import Prediction
-from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
-from tweepy import Stream
 from . import analysis_blueprint
 from flask.views import MethodView
-from flask import make_response, request, jsonify
-from flask_json import FlaskJSON, JsonError, json_response, as_json
+from flask import make_response, request
 
 #Variables that contains the user credentials to access Twitter API
 access_token = ""
