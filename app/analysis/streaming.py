@@ -3,7 +3,7 @@ from .prediction import Prediction
 from tweepy import OAuthHandler
 from . import analysis_blueprint
 from flask.views import MethodView
-from flask import make_response, request
+from flask import make_response, request, jsonify
 
 #Variables that contains the user credentials to access Twitter API
 access_token = ""
@@ -19,6 +19,9 @@ class GetTweets(MethodView):
         """Handle POST request for this view. Url ---> /stream"""
         print ('incoming request',request.data )
 
+        # predict = Prediction()
+        # results = predict.receiveAnalysisParameter("That movie was the best one I have ever seen.")
+        # print("result is", results)
 
         auth = OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
@@ -31,6 +34,7 @@ class GetTweets(MethodView):
         for tweet in tweets:
             predict = Prediction()
             results = predict.receiveAnalysisParameter(tweet.text)
+            print("results are", results)
             self.response.append(results)
 
             count +=1
