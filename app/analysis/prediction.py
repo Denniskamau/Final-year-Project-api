@@ -87,14 +87,14 @@ class Prediction():
 
         if (predictedSentiment[0] > predictedSentiment[1]):
             data = {
-                "message": "Positive Sentiment",
+                "message": "Positive",
                 "percentage": percentage,
                 "tweet":inputParam
             }
             return data
         else:
             data = {
-                "message":"Negative Sentiment",
+                "message":"Negative",
                "tweet":inputParam,
                "percentage":percentage
             }

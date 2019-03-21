@@ -1,0 +1,10 @@
+{'message': 'Positive', 'percentage': {'pos': '3.9115515', 'neg': '-1.3400385'}, 'tweet': 'RT @jeffdunham: Hey everybody!  Want to win an exclusive all-expenses paid trip to the taping of my new Netflix special on June 21st in Dal…'}
+{'message': 'Positive', 'percentage': {'pos': '2.6173136', 'neg': '-4.7844367'}, 'tweet': 'Teaching AQA GCSE Religious Studies? Join over 1000 teachers in our resource sharing group on Facebook! :)… https://t.co/YsqT8PqzLB'}
+{'message': 'Positive', 'percentage': {'pos': '3.4406831', 'neg': '-1.6666883'}, 'tweet': 'I HOPE I CAN STILL CAN AVAIL OF THESE LOTUS TUBERS IN JUNE. https://t.co/U74o22RP1N'}
+{'message': 'Negative', 'tweet': 'RT @itsShowtimeNa: “Hindi natin iiwan ang Showtime. Never kaming mag-iiwanan."\n\n - Jugs &amp; Teddy \n\nIt\'s Showtime: Media sends off Jugs and T…', 'percentage': {'pos': '-8.886802', 'neg': '-1.9884661'}}
+{'message': 'Negative', 'tweet': "Tonight's the night! Come along to Avenue Campus at the University of Northampton at 6:15pm for an evening of quiz-… https://t.co/TxKeBPoFU2", 'percentage': {'pos': '-1.5117029', 'neg': '0.25289628'}}
+{'message': 'Negative', 'tweet': "Whatever I can't miss.. — watching Kesari at PVR Cinemas Naraina Delhi https://t.co/Mvn8Pys8uf", 'percentage': {'pos': '-0.78985727', 'neg': '7.453694'}}
+{'message': 'Positive', 'percentage': {'pos': '-0.79778457', 'neg': '-3.757956'}, 'tweet': 'Come see me and say Hello! — at Zales https://t.co/pDFj9Y0Hpg'}
+{'message': 'Positive', 'percentage': {'pos': '1.5103058', 'neg': '-3.7877214'}, 'tweet': 'It is a whole lot easier to tell a man or woman going through dark times mentally to "talk to somebody" until you a… https://t.co/eprpRg21f0'}
+{'message': 'Positive', 'percentage': {'pos': '8.088604', 'neg': '1.3267983'}, 'tweet': "Thanks for following me on Twitter. Check out f my Facebook Page to see what I'm up to!"}
+{'message': 'Positive', 'percentage': {'pos': '5.3251987', 'neg': '-3.0205488'}, 'tweet': 'RT @blackcircles: 🏎️ #WIN a LEGO® Ferrari F40 courtesy of @BridgestoneUK 🏎️\n\nJust RT&amp;F @blackcircles for a chance to WIN!\n\nEnds: 28/04/19 a…'}

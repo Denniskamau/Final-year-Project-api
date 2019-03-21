@@ -2,9 +2,12 @@ from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 # local import
 from instance.config import app_config
-from flask import request, jsonify, abort, make_response
+from flask import request, jsonify, abort, make_response, render_template
 from flask_cors import CORS
 from flask_json import FlaskJSON, JsonError, json_response, as_json
+from flask_mail import Mail, Message
+from alembic.autogenerate import render
+from flask.templating import render_template
 # initialize sql-alchemy
 db = SQLAlchemy()
 
@@ -17,7 +20,17 @@ def create_app(config_name):
     app.config.from_pyfile('config.py')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
-    #FlaskJSON(app)
+    #Mail configs
+    mail_settings = {
+        "MAIL_SERVER": 'smtp.gmail.com',
+        "MAIL_PORT": 465,
+        "MAIL_USE_TLS": False,
+        "MAIL_USE_SSL": True,
+        "MAIL_USERNAME": 'hisiaapp@gmail.com',
+        "MAIL_PASSWORD": '=d3n!t0K"M"'
+    }
+    app.config.update(mail_settings)
+    mail = Mail(app)
 
 
     @app.route('/', methods=['GET'])
@@ -27,6 +40,20 @@ def create_app(config_name):
         })
         response.status_code =200
         return response
+
+    @app.route('/mail', methods=['POST'])
+    def send_mail():
+        try:
+            email = str(request.data.get('email'))
+            results = request.data.get('results')
+            # print('results',results["analysis"])
+            msg = Message('Hello', sender = 'hisiaapp@gmail.com', recipients = [email])
+            # msg.body = "This is a test email"
+            msg.html = render_template('analysis.html',results = results)
+            mail.send(msg)
+            return "Sent mail"
+        except Exception as e:
+            return str(e)
 
     @app.route('/companies/', methods=['POST','GET'])
     def companies():

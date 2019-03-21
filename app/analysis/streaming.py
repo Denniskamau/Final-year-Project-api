@@ -1,3 +1,4 @@
+import json
 import tweepy
 from .prediction import Prediction
 from tweepy import OAuthHandler
@@ -6,10 +7,10 @@ from flask.views import MethodView
 from flask import make_response, request, jsonify
 
 #Variables that contains the user credentials to access Twitter API
-access_token = ""
-access_token_secret = ""
-consumer_key = ""
-consumer_secret = ""
+access_token = "360352221-FJPX4r8ttCVWiQS9ZNBe8wCSruyGsq7mQxitXY1o"
+access_token_secret = "rNm8eCtdJ6s8DN9dtYPgMLqe549PUqQdmCT3nVhaZ6Cbv"
+consumer_key = "dmZVwBgGoE8hG27TLf3k1cUX6"
+consumer_secret = "suKcD9XCcy5Fd2VdiPr0GS1sSt3MRFvJEckC9gbFCnrNefSevk"
 
 
 all_tweets = []
@@ -30,16 +31,17 @@ class GetTweets(MethodView):
         count = 0
         date_since = "2019-01-01"
         tweets = tweepy.Cursor(api.search,q=query,lang="en",since=date_since).items(10)
-
+        self.response.clear()
         for tweet in tweets:
             predict = Prediction()
             results = predict.receiveAnalysisParameter(tweet.text)
-            print("results are", results)
+            # print("results are", results)
             self.response.append(results)
-
             count +=1
             if count >=10:
                 print("count is greater than 10")
+
+
 
         return make_response(self.response)
 
