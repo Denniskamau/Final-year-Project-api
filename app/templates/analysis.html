@@ -5,6 +5,7 @@
 <p>Hello,</p>
 <p>Thanks for using Hisia</p>
 <p>Here is the analysis report you have carried out</p>
+
 <div class="table-responsive">
     <table class="table">
     <thead>
@@ -15,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for result in results["analysis"] %}
+        {% for result in results %}
         <td>{{ result.tweet }}</td>
          <td>{{ result.message }}</td>
           <td>{{ result.percentage }}</td>

@@ -17,7 +17,7 @@ class RegistrationView(MethodView):
 
         if not user:
             # There is no user so we'll try to register them
-            
+
             try:
                 post_data = request.data
                 # Register the user
@@ -32,9 +32,9 @@ class RegistrationView(MethodView):
                     'status': 'success',
                     'token': token.decode()
                 }
-                
 
-                
+
+
                 # return a response notifying the user that they registered successfully
                 return make_response(jsonify(response)), 201
             except Exception as e:
@@ -52,8 +52,8 @@ class RegistrationView(MethodView):
 
             return make_response(jsonify(response)), 202
 
- 
-    
+
+
 
 
 class UserView(MethodView):
@@ -62,9 +62,9 @@ class UserView(MethodView):
 
         print('/auth/user reached')
 
-        
 
-        
+
+
 
 class LoginView(MethodView):
     """This class-based view handles user login and access token generation."""
@@ -75,19 +75,22 @@ class LoginView(MethodView):
         try:
             # Get the user object using their email (unique to every user)
             user = User.query.filter_by(email=request.data['email']).first()
-            
+
             # Try to authenticate the found user using their password
             if user and user.password_is_valid(request.data['password']):
                 # Generate the access token. This will be used as the authorization header
+
                 token = User.generate_token(self,user.id)
-                
+
                 if token:
 
                     response = {
                         'status': 'success',
-                        'token': token.decode()
+                        'token': token.decode(),
+                        'user':user.email,
+                        'business':user.name
                     }
-                    
+
                     return make_response(jsonify(response)), 200
             else:
                 # User does not exist. Therefore, we return an error message

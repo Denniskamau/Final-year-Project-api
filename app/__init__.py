@@ -46,10 +46,10 @@ def create_app(config_name):
         try:
             email = str(request.data.get('email'))
             results = request.data.get('results')
-            # print('results',results["analysis"])
+
             msg = Message('Hello', sender = 'hisiaapp@gmail.com', recipients = [email])
             # msg.body = "This is a test email"
-            msg.html = render_template('analysis.html',results = results)
+            msg.html = render_template('analysis.html',results = results["analysis"])
             mail.send(msg)
             return "Sent mail"
         except Exception as e:
