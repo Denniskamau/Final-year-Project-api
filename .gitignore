@@ -1,3 +1,4 @@
 .env
 ./app/analysis/tensorboard/*
 ./app/analysis/tensorboard/
+.venv
